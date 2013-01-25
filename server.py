@@ -32,6 +32,11 @@ def cached(timeout=5*60, key='view/%s'):
         return decorated_function
     return decorator
 
+# Static Files
+    
+@app.route('/static/<path:afilepath>')
+def serve_static(afilepath):
+    return redirect(url_for('static', filename=afilepath))
 
 # Contents URL
 
