@@ -45,29 +45,34 @@ def serve_static(afilepath):
 def homepage():
     return "Hello World!"
 
+@app.route("/<page>")
+@cached()
+def page(page):
+    return "Hello World!"
+    
 # General URL
 
 @app.route("/avatar")
-def homepage():
+def avatar():
     # return Avatar image in base of a format
     return "Hello World!"
 
 @app.route("/card")
-def homepage():
+def vcard():
     # return the virtual business card in base of the specified format 
     return "Hello World!"
 
 @app.route("/qrcode")
-def homepage():
+def qrcode():
     # return a qrcode image ( jpeg or png ) with  
     return "Hello World!"
 
-# API 
+# Various API
 
 @app.route("/api/contact")
-def homepage():
-    # return the virtual business  
-    return "Hello World!"
+def api_contact():
+    # return the virtual business in json format
+    json.dumps({})
 
 if __name__ == "__main__":
     app.run()
