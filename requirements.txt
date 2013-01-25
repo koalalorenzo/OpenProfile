@@ -1,2 +1,3 @@
-Flask
-mongodb
+simplejson
+pymongo
+flask
