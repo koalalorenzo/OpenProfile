@@ -1,5 +1,4 @@
 *.py[cod]
-configuration.py
 
 # C extensions
 *.so

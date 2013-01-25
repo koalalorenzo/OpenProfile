@@ -1,4 +1,4 @@
-# Flask 
+# Flask data
 FLASK_SECRET_KEY = ""
 
 # Database connections
