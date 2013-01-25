@@ -1,4 +1,17 @@
-from flask import Flask, render_template, session, url_for, abort, redirect, flash, request
+#!/usr/bin/python
+# -*- coding=utf-8 -*-
+
+"""OpenProfile: Open your identity to the web"""
+
+__version__ = "0.1"
+__author__ = "Lorenzo Setale ( http://www.setale.me/ )"
+__author_email__ = "koalalorenzo@gmail.com"
+__license__ = "See: http://creativecommons.org/licenses/by-nd/3.0/ "
+__copyright__ = "Copyright (c) 2009, 2010, 2011, 2012, 2013, 2014 Lorenzo Setale"
+
+from flask import Flask
+from flask import url_for
+from flask import redirect
 
 from pymongo import Connection, ASCENDING, DESCENDING
 from configuration import *
