@@ -1,8 +1,8 @@
-from werkzeug.contrib.cache import FileSystemCache
+from werkzeug.contrib.cache import SimpleCache
+from functools import wraps
 
-cache = FileSystemCache(cache_dir="cache")
+cache = SimpleCache()
 
-# Decorators
 def cached(timeout=60, key='view/%s'):
     def decorator(f):
         @wraps(f)
