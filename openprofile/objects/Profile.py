@@ -6,13 +6,15 @@ from hashlib import sha1
 from datetime import datetime
 
 class Profile(object):
-    def __init__(self, profile_url):
-        self.profile_url = profile_url
+    def __init__(self):
+        self.profile_url = ""
         
         self.username = ""
         self.password = None
         self.__crptd = False
-
+        self.userhash = "" # sha1("%s-%s" % ( self.username, self.password ).hexdigest()
+        
+        
         self.avatar = "" # URL avatar
         
         self.first_name = ""
@@ -53,16 +55,17 @@ class Profile(object):
 
         
     def already_exist(self):
-        search = self.database.users.find_one({"profile_url": self.profile_url})
+        search = self.database.users.find_one({"userhash": self.userhash})
         if search:
             return True
         return False
         
-    def by_dictionary(dictionary):
-                
+    def by_dictionary(self, dictionary):
+        self.profile_url = dictionary['profile_url']
         self.username = dictionary['username']
         self.password = dictionary['password']
         self.__crptd = True
+        self.userhash = dictionary['userhash']
         
         self.first_name = dictionary['first_name']
         self.second_name = dictionary['second_name']
@@ -77,7 +80,7 @@ class Profile(object):
         self.is_admin = dictionary['is_admin']
         
     def load(self, username):
-        search = self.database.users.find_one({"profile_url": self.profile_url})
+        search = self.database.users.find_one({"userhash": self.userhash})
         if not search:
             raise Exception("Username not found")
 
@@ -85,7 +88,7 @@ class Profile(object):
     
     def save(self):
         self.__crypt_password()
-        search = self.database.users.find_one({"profile_url": self.profile_url})
+        search = self.database.users.find_one({"userhash": self.userhash})
         dictionary = self.__dict__(old=search)
         self.database.users.save(dictionary)
 
@@ -98,6 +101,7 @@ class Profile(object):
         old['profile_url'] = self.profile_url
         old['username'] = self.username
         old['password'] = self.password
+        old['userhash'] = self.userhash
         old['avatar'] = self.avatar
         
         old['first_name'] = self.first_name
