@@ -52,7 +52,12 @@ class Profile(object):
         if self.password != check:
             return False
         return True
-
+        
+    def load_admin(self):
+        search = self.database.users.find_one({"userhash": self.userhash, "is_admin":True})
+        if not search:
+            raise Exception("Admin not found")
+        self.by_dictionary(search)
         
     def already_exist(self):
         search = self.database.users.find_one({"userhash": self.userhash})
@@ -79,20 +84,17 @@ class Profile(object):
         
         self.is_admin = dictionary['is_admin']
         
-    def load(self, username):
+    def load(self):
         search = self.database.users.find_one({"userhash": self.userhash})
         if not search:
             raise Exception("Username not found")
-
-        return
+        self.by_dictionary(search)
     
     def save(self):
         self.__crypt_password()
         search = self.database.users.find_one({"userhash": self.userhash})
         dictionary = self.__dict__(old=search)
         self.database.users.save(dictionary)
-
-        return
         
     def __dict__(self, old=None):
         if not old:
