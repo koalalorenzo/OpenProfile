@@ -4,5 +4,5 @@ import json
 
 @app.route("/admin/")
 def admin_home():
-    # return the virtual business in json format
+    """Admin homepage view: the dashboard"""
     json.dumps({})

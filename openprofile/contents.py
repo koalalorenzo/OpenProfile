@@ -3,23 +3,25 @@ from openprofile.decorators import *
 
 @app.route('/')
 def index():
+    """Home page of the profile"""
     return 'Hello World!'
 
 @app.route("/<page>")
 def page(page):
-    return "Hello World!"
+    """Generic Page View"""
+    return "Hello Page!"
 
 @app.route("/avatar")
 def avatar():
-    # return Avatar image in base of a format
+    """ Return the avatar """
     return "Hello World!"
 
 @app.route("/card")
 def vcard():
-    # return the virtual business card in base of the specified format 
+    """ Return the business card """
     return "Hello World!"
 
 @app.route("/qrcode")
 def qrcode():
-    # return a qrcode image ( jpeg or png ) with  
+    """ Return the qrcode to the profile """
     return "Hello World!"
