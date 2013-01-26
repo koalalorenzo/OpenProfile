@@ -9,4 +9,4 @@ def api_contact():
         it contains also the key (or a sort of ) to verify messages. If the key change,
         the owner must re-authorize the other friend.
     """
-    json.dumps({})
+    return json.dumps({})

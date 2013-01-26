@@ -14,7 +14,7 @@ def page(page):
 @app.route("/avatar")
 def avatar():
     """ Return the avatar """
-    return "Hello World!"
+    return "Hello Avatar!"
 
 @app.route("/card")
 def vcard():
@@ -24,4 +24,4 @@ def vcard():
 @app.route("/qrcode")
 def qrcode():
     """ Return the qrcode to the profile """
-    return "Hello World!"
+    return "Hello qrcode!"

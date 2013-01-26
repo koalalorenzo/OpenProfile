@@ -8,15 +8,15 @@ def conversations_list():
 @app.route("/messages/<userhash>")
 def conversation(userhash):
     """ See the conversation with another user."""
-    return "Hello World!"
+    return "Hello %s!" % userhash
 
 @app.route("/messages/send")
 def send_message():
     """ Send the message to another OpenProfile."""
-    return "Hello World!"
+    return "Hello send!"
 
 @app.route("/messages/receive", methods=['POST'])
 def get_message():
     """ Receive the message from another OpenProfile."""
-    return "Hello World!"
+    return "Hello get!"
 
