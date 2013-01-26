@@ -23,10 +23,11 @@ class Page(object):
         self.keywords = dictionary['keywords']
         self.created_at = dictionary['created_at']
         
-    def load(self, username):
+    def load(self):
         search = self.database.pages.find_one({"url": self.url})
         if not search:
             raise Exception("Page not found")
+        self.by_dictionary(search)
         return
     
     def save(self):

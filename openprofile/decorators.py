@@ -1,3 +1,4 @@
+from flask import request
 from werkzeug.contrib.cache import SimpleCache
 from functools import wraps
 
