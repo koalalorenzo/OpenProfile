@@ -7,6 +7,19 @@ from datetime import datetime
 import requests
 
 class Profile(object):
+    """ 
+        The Profile Object is the basic entity of the entire System because it
+        manage authentication and provides informations about other profiles.
+        
+        In the database are stored all the Profile the owner had meet (thx to
+        Connection object). These remote profiles are not allowed to get in touch with
+        the owner unless the owner will authorized them. 
+        
+        The authentication is provided by an hash ( username and password ) that
+        is stored also in other authorized friends' database. If this hash 
+        changes ( because user changed username and password ) other people musth
+        re-authorized the user because of security reason.
+    """
     def __init__(self):
         self.profile_url = ""
         
@@ -26,7 +39,7 @@ class Profile(object):
         
         self.social_networks = list() # {"social":"twitter", "link":"http://twitter.com/koalalorenzo" }
         self.keywords = list()
-                         
+        
         self.is_admin = False
         self.database = None
         

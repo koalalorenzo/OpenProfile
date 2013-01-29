@@ -4,6 +4,7 @@
 from datetime import datetime
 
 class Page(object):
+    """ The page object: it represent a web page written in Markdown or HTML """
     def __init__(self, url):
         self.url = "/"
         

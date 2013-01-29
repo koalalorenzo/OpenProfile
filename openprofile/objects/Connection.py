@@ -5,6 +5,10 @@ from datetime import datetime
 from openprofile.objects.Profile import Profile
 
 class Connection(object):
+    """
+        This object manage the "connections" between two
+        OpenProfile installations. 
+    """
     def __init__(self):
         self.username = ""
         self.userhash = ""

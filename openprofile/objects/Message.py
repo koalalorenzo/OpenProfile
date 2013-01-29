@@ -8,6 +8,10 @@ from pbkdf2 import crypt, PBKDF2
 from Crypto.Cipher import AES
 
 class Message(object):
+    """ 
+        This object manage the Message sent o received from or by an other OpenProfile installation.
+        It's content is crypted and written in Markdown. 
+    """
     def __init__(self, url):
                 
         self.author = "" # profile_url
