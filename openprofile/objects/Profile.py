@@ -4,13 +4,14 @@
 
 from hashlib import sha1
 from datetime import datetime
+import requests
 
 class Profile(object):
     def __init__(self):
         self.profile_url = ""
         
         self.username = ""
-        self.userhash = "" # sha1("%s-%s" % ( self.username, self.password ).hexdigest()
+        self.userhash = ""
         
         self.avatar = "" # URL avatar
         
@@ -22,19 +23,29 @@ class Profile(object):
         
         self.description = ""
         self.short_description = "" # 140 chars ( better if 119 to insert the URL of your profile )
-                
+        
         self.social_networks = list() # {"social":"twitter", "link":"http://twitter.com/koalalorenzo" }
         self.keywords = list()
                          
         self.is_admin = False
         self.database = None
         
+    def get_profile_from_remote(self, profile_url=None):
+        """ Load and return the user profile from a remote installation """
+        if not profile_url:
+            profile_url = self.profile_url
+        if profile_url[-1] == "/":
+            profile_url = profile_url[0:-1] 
+        r = requests.get("%s/api/profile/owner" % profile_url)    
+        self.by_dictionary(r.json)
+        return self
+        
     def get_userhash(self, password):
         self.userhash = sha1("%s-%s" % ( self.username, password ).hexdigest()
         return self.userhash
         
     def verify_login(self, username, password):
-        check_userhash = sha1("%s-%s" % ( self.username, password ).hexdigest()
+        check_userhash = sha1("%s-%s" % ( username, password ).hexdigest()
         if self.userhash != check_userhash:
             return False
         return True
@@ -51,10 +62,9 @@ class Profile(object):
             return True
         return False
         
-    def by_dictionary(self, dictionary):
+    def by_dictionary(self, dictionary, avoid_admin=False):
         self.profile_url = dictionary['profile_url']
         self.username = dictionary['username']
-        self.__crptd = True
         self.userhash = dictionary['userhash']
         
         self.first_name = dictionary['first_name']
@@ -66,8 +76,9 @@ class Profile(object):
         self.description = dictionary['description']
         self.short_description = dictionary['short_description']
         self.keywords = dictionary['keywords']
-        
-        self.is_admin = dictionary['is_admin']
+
+        if not avoid_admin:
+            self.is_admin = dictionary['is_admin']
         
     def load(self):
         search = self.database.users.find_one({"userhash": self.userhash})

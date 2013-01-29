@@ -3,3 +3,4 @@ pymongo
 flask
 pbkdf2
 pycrypto
+requests

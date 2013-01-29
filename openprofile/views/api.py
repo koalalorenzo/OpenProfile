@@ -2,7 +2,7 @@ from openprofile import app
 from openprofile.decorators import *
 import json
 
-@app.route("/api/peers/contact")
+@app.route("/api/profile/owner")
 def api_contact():
     """
         Returns the openprofile business card in json format: used by other installations
