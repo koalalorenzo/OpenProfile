@@ -10,10 +10,7 @@ class Profile(object):
         self.profile_url = ""
         
         self.username = ""
-        self.password = None
-        self.__crptd = False
         self.userhash = "" # sha1("%s-%s" % ( self.username, self.password ).hexdigest()
-        
         
         self.avatar = "" # URL avatar
         
@@ -32,24 +29,13 @@ class Profile(object):
         self.is_admin = False
         self.database = None
         
-    def change_password(self, new_password):
-        if self.__crptd:
-            self.password = sha1(new_password).hexdigest()
-        else:
-            self.password = new_password
-        
-    def __crypt_password(self):
-        if not self.password: return
-        if self.__crptd: return
-        self.password = sha1(self.password).hexdigest()
-        self.__crptd = True
+    def get_userhash(self, password):
+        self.userhash = sha1("%s-%s" % ( self.username, password ).hexdigest()
+        return self.userhash
         
     def verify_login(self, username, password):
-        if self.__crptd:
-            check = sha1(password).hexdigest()
-        else: 
-            check = password
-        if self.password != check:
+        check_userhash = sha1("%s-%s" % ( self.username, password ).hexdigest()
+        if self.userhash != check_userhash:
             return False
         return True
         
@@ -68,7 +54,6 @@ class Profile(object):
     def by_dictionary(self, dictionary):
         self.profile_url = dictionary['profile_url']
         self.username = dictionary['username']
-        self.password = dictionary['password']
         self.__crptd = True
         self.userhash = dictionary['userhash']
         
@@ -102,7 +87,6 @@ class Profile(object):
         
         old['profile_url'] = self.profile_url
         old['username'] = self.username
-        old['password'] = self.password
         old['userhash'] = self.userhash
         old['avatar'] = self.avatar
         
@@ -112,11 +96,10 @@ class Profile(object):
         old['emails'] = self.emails
         old['phones'] = self.phones
         
-        old['twitter'] = self.twitter
-        old['facebook'] = self.facebook
-        
         old['description'] = self.description
         old['short_description'] = self.short_description
+        
+        old['social_networks'] = self.social_networks
         old['keywords'] = self.keywords
         
         old['is_admin'] = self.is_admin
