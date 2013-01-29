@@ -37,7 +37,7 @@ class Profile(object):
         if profile_url[-1] == "/":
             profile_url = profile_url[0:-1] 
         r = requests.get("%s/api/profile/owner" % profile_url)    
-        self.by_dictionary(r.json)
+        self.by_dictionary(r.json, avoid_admin=False)
         return self
         
     def get_userhash(self, password):
