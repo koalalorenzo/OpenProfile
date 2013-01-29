@@ -20,9 +20,24 @@ class Message(object):
                          
         self.database = None
         
-    def return_encrypted(self):
-        
-        
+    def encrypt_content(self, secret):
+        if self.content:
+            raise Exception("Content already crypted")
+
+        self.__cipher = AES.new(secret)
+        content = self.content.encode("base64")
+        while not len(content)%16 == 0:
+            content = " " + content
+        self.content = self.__cipher.encrypt(content).encode("base64")
+        return self.content
+     
+    def decrypted_content(self, secret):
+        if not self.content:
+            raise Exception("No content found")
+        self.__cipher = AES.new(secret)    
+        content = self.__cipher.decrypt(self.content.decode("base64"))
+        return content.decode("base64")
+                
     def by_dictionary(self, dictionary):
         self.url = dictionary['url']
         self.author = dictionary['author']
