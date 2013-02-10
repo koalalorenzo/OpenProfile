@@ -23,8 +23,8 @@ class Profile(object):
         self.first_name = ""
         self.second_name = ""
         
-        self.emails = list() # Ex: "lorenzo.setale@gmail.com","koalalorenzo@gmail.com"
-        self.phones = list() # Ex: "+39 329 06 84 001","+39 06 929 58 369"
+        self.emails = list() 
+        self.phones = list() 
         
         self.description = ""
         self.short_description = "" # 140 chars ( better if 119 to insert the URL of your profile )
