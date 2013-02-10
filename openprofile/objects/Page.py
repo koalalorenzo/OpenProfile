@@ -3,6 +3,9 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
+class PageNotFound(Exception):
+    pass
+
 class Page(object):
     """ The page object: it represent a web page written in Markdown or HTML """
     def __init__(self, url):
@@ -27,7 +30,7 @@ class Page(object):
     def load(self):
         search = self.database.pages.find_one({"url": self.url})
         if not search:
-            raise Exception("Page not found")
+            raise PageNotFound()
         self.by_dictionary(search)
         return
     
