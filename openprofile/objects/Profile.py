@@ -57,7 +57,7 @@ class Profile(object):
         return True
         
     def load_admin(self):
-        search = self.database.users.find_one({"userhash": self.userhash, "is_admin":True})
+        search = self.database.users.find_one({"is_admin":True})
         if not search:
             raise Exception("Admin not found")
         self.by_dictionary(search)
