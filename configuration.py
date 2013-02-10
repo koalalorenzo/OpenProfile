@@ -8,3 +8,4 @@ MONGO_DB = "OpenProfile"
 
 MONGO_USERNAME = "openprofile"
 MONGO_PASSWORD = "superSecretPassword"
+ 

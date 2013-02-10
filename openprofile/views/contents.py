@@ -17,7 +17,15 @@ import markdown
 @app.route('/')
 def index():
     """Home page of the profile"""
-    return 'Hello World!'
+    profile = Profile()
+    profile.load_admin()
+    page = Page("/")
+    try:
+        page.load()
+    except:
+        abort(500)
+    html = markdown.markdown(page.content)
+    return render_template('homepage.html', html=html, profile=profile)
 
 @app.route("/<page_url>")
 def page(page_url):
