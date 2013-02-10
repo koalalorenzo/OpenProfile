@@ -2,7 +2,7 @@
 FLASK_SECRET_KEY = ""
 
 # Database connections
-MONGO_HOST = "176.58.121.59"
+MONGO_HOST = "127.0.0.1"
 MONGO_PORT = 27017
 MONGO_DB = "OpenProfile" 
 
