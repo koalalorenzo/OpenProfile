@@ -4,3 +4,4 @@ flask
 pbkdf2
 pycrypto
 requests
+markdown
