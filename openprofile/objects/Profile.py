@@ -22,6 +22,7 @@ class Profile(object):
         
         self.first_name = ""
         self.second_name = ""
+        self.complete_name = ""
         
         self.emails = list() 
         self.phones = list() 
@@ -74,6 +75,7 @@ class Profile(object):
         
         self.first_name = dictionary['first_name']
         self.second_name = dictionary['second_name']
+        self.complete_name = dictionary['complete_name']
         
         self.emails = dictionary['emails']
         self.phones = dictionary['phones']
@@ -108,6 +110,7 @@ class Profile(object):
         
         old['first_name'] = self.first_name
         old['second_name'] = self.second_name 
+        old['complete_name'] = self.complete_name
         
         old['emails'] = self.emails
         old['phones'] = self.phones
