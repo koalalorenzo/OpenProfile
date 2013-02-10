@@ -1,0 +1,45 @@
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <title>OpenProfile installation</title>
+
+        <meta name="author" content="OpenProfile">
+        <meta name="description" content="First installation OpenProfile.">
+        <meta name="keywords" content="OpenProfile">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+    
+        <script src="/static/bootstrap/js/bootstrap.js"></script>
+        <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    	<style type="text/css">
+          body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+          }
+        </style>
+        <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        {% block header %}{% endblock %}
+        <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}
+            {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      {{ message }}
+                  </div>
+            {% endfor %}
+          {% endif %}{% endwith %}
+        {% block container %}{% endblock %}
+      <hr>
+    </div>
+    </body>
+</html>

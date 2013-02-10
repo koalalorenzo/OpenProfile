@@ -18,4 +18,4 @@ import markdown
 @app.route('/')
 def installation_index():
     """Home page of the profile"""
-    return render_template('homepage.html', html="ciao", profile=None)
+    return render_template('installation/first_run.html')
