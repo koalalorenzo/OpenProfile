@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block container %}
+    <h1>{{ page.title }}</h1>
+    {{ html }}    
+{% endblock %}
+
+{% block metatag %}
+    <meta name="author" content="{{ profile.complete_name }}">
+    <meta name="keywords" content="{{ page.keywords }}">    
+{% endblock %}
