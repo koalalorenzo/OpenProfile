@@ -6,7 +6,11 @@ from openprofile.objects import Profile
 
 from random import choice
 
-from flask import Flask, render_template, session, url_for, abort, redirect, flash, request
+from flask import render_template
+from flask import url_for
+from flask import abort
+from flask import redirect
+from flask import flash
 
 import markdown
 
@@ -22,7 +26,10 @@ def page(page_url):
     profile.load_admin()
     
     page = Page("/%s" page_url)
-    page.load()
+    try:
+        page.load()
+    except:
+        abort(404)
     html = markdown.markdown(page.content)
     
     return render_template('page.html', page=page, html=html, profile=profile)
