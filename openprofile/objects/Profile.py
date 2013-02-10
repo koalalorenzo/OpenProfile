@@ -6,6 +6,9 @@ from hashlib import sha1
 from datetime import datetime
 import requests
 
+class AdminNotFound(Exception):
+    pass
+    
 class Profile(object):
     """ 
         The Profile Object is the basic entity of the entire System because it
@@ -59,7 +62,7 @@ class Profile(object):
     def load_admin(self):
         search = self.database.users.find_one({"is_admin":True})
         if not search:
-            raise Exception("Admin not found")
+            raise AdminNotFound()
         self.by_dictionary(search)
         
     def already_exist(self):
