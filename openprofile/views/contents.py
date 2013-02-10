@@ -1,4 +1,5 @@
 from openprofile import app
+from openprofile import db
 from openprofile.decorators import *
 
 from openprofile.objects import Page
@@ -15,11 +16,14 @@ from flask import flash
 import markdown
 
 @app.route('/')
+@cached()
 def index():
     """Home page of the profile"""
     profile = Profile()
+    profile.database = db
     profile.load_admin()
     page = Page("/")
+    page.database = db
     try:
         page.load()
     except:
@@ -28,12 +32,15 @@ def index():
     return render_template('homepage.html', html=html, profile=profile)
 
 @app.route("/<page_url>")
+@cached()
 def page(page_url):
     """Generic Page View"""
     profile = Profile()
+    profile.database = db
     profile.load_admin()
     
     page = Page("/%s" page_url)
+    page.database = db
     try:
         page.load()
     except:
@@ -54,5 +61,5 @@ def vcard():
 
 @app.route("/qrcode")
 def qrcode():
-    """ Return the qrcode to the profile """
+    """ Return the qrcode that links the profile """
     return "Hello qrcode!"
