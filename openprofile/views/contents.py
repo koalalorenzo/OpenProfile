@@ -39,7 +39,7 @@ def page(page_url):
     profile.database = db
     profile.load_admin()
     
-    page = Page("/%s" page_url)
+    page = Page("/%s" % page_url)
     page.database = db
     try:
         page.load()

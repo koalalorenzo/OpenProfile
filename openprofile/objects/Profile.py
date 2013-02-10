@@ -47,11 +47,11 @@ class Profile(object):
         return self
         
     def get_userhash(self, password):
-        self.userhash = sha1("%s-%s" % ( self.username, password ).hexdigest()
+        self.userhash = sha1("%s-%s" % ( self.username, password ).hexdigest() )
         return self.userhash
         
     def verify_login(self, username, password):
-        check_userhash = sha1("%s-%s" % ( username, password ).hexdigest()
+        check_userhash = sha1("%s-%s" % ( username, password ).hexdigest() )
         if self.userhash != check_userhash:
             return False
         return True
