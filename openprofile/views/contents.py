@@ -2,8 +2,8 @@ from openprofile import app
 from openprofile import db
 from openprofile.decorators import *
 
-from openprofile.objects import Page
-from openprofile.objects import Profile
+from openprofile.objects import Page, AdminNotFound
+from openprofile.objects import Profile, PageNotFound
 
 from random import choice
 
@@ -21,12 +21,15 @@ def index():
     """Home page of the profile"""
     profile = Profile()
     profile.database = db
-    profile.load_admin()
+    try:
+        profile.load_admin()
+    except AdminNotFound:
+        return redirect(url_for("installation_index"))
     page = Page("/")
     page.database = db
     try:
         page.load()
-    except:
+    except PageNotFound:
         abort(500)
     html = markdown.markdown(page.content)
     return render_template('homepage.html', html=html, profile=profile)
@@ -43,7 +46,7 @@ def page(page_url):
     page.database = db
     try:
         page.load()
-    except:
+    except PageNotFound:
         abort(404)
     html = markdown.markdown(page.content)
     
