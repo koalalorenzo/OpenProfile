@@ -4,7 +4,7 @@ from functools import wraps
 
 cache = SimpleCache()
 
-def cached(timeout=60, key='view/%s'):
+def cached(timeout=60*5, key='view/%s'):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
