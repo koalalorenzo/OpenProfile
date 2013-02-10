@@ -1,13 +1,15 @@
 <html lang="it">
     <head>
         <meta charset="utf-8">
-        <title>Who is {{ profile.username }} ?</title>
-        <link rel="icon" href="/static/icon128.png" type="image/png" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
+        <title>{{ profile.username }}</title>
+
+        {% block metatag %}
         <meta name="author" content="{{ profile.complete_name }}">
-    
+        <meta name="description" content="{{ profile.short_description }}">
+        <meta name="keywords" content="{{ profile.keywords }}">
+        {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="/static/common.js"></script>
     
@@ -25,8 +27,8 @@
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-    
-        <link rel="shortcut icon" href="/static/favicon.ico">
+
+        {% block head %}{% endblock %}
     </head>
     <body>
         {% block header %}{% endblock %}
