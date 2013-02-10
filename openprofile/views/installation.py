@@ -15,7 +15,7 @@ from flask import flash
 
 import markdown
 
-@app.route('/')
+@app.route('/installation/')
 def installation_index():
     """Home page of the profile"""
     return render_template('installation/first_run.html')

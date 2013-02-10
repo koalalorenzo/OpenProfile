@@ -28,9 +28,9 @@ db.authenticate(MONGO_USERNAME,MONGO_PASSWORD)
 def serve_static(afilepath):
     return redirect(url_for('static', filename=afilepath))
 
-import openprofile.views.installation
 import openprofile.views.admin
 import openprofile.views.api
 import openprofile.views.contents
 import openprofile.views.messages
+import openprofile.views.installation
 
