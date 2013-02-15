@@ -1,4 +1,49 @@
 {% extends "installation/layout.html" %}
 
 {% block container %}
+    <h1 align="center">Create your profile</h1>
+    <div class="row">
+        <div class="span12" align="center">
+            Insert your username and password: You <b>will not able to modify</b> these values later!
+        </div>
+    </div>
+    <div class="row">
+        <div class="span3"></div>
+        <div class="span6">
+            <br/>
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="inputUsername">Username</label>
+                    <div class="controls">
+                        <input type="text" id="inputUsername" placeholder="username">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword">Password</label>
+                    <div class="controls">
+                        <input type="password" id="inputPassword" placeholder="password">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span3"></div>
+    </div>
+    <div class="row">
+        <div class="span12" align="center">
+            Username and password are used to generate a secret key to identify your profile even if <br/>
+            you re-install the OpenProfile and don't want to loose contacts in the peer-to-peer network. <br/>
+            <br/>
+            If you re-install OpenProfile with a different password you will loose <br/>
+            every contact connected to your Profile. Until people authorize again <br/>
+            your new profile, you will not be able to send messages!
+        </div>
+    </div>
+    <ul class="pager">
+        <li class="previous">
+            <a href="/installation/">&larr; Back</a>
+        </li>
+        <li class="next">
+            <a href="/installation/homepage">Create your profile! &rarr;</a>
+        </li>
+    </ul>
 {% endblock %}
