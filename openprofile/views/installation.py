@@ -17,5 +17,20 @@ import markdown
 
 @app.route('/installation/')
 def installation_index():
-    """Home page of the profile"""
+    """Install OpenProfile"""
     return render_template('installation/first_run.html')
+
+@app.route('/installation/profile')
+def installation_create_profile():
+    """Create the Profile"""
+    return render_template('installation/create_profile.html')
+    
+@app.route('/installation/homepage')
+def installation_create_homepage():
+    """Create the homepage"""
+    return render_template('installation/create_homepage.html')
+    
+@app.route('/installation/completed')
+def installation_completed():
+    """Check if everything is done and say it to the user"""
+    return render_template('installation/completed.html')
