@@ -6,19 +6,24 @@ from flask import render_template
 from flask import session
 from flask import redirect
 from flask import flash
+from flask import url_for
 
 from openprofile.objects import Profile
 
 @app.route("/auth/login", methods=['GET', 'POST'])
 def login():
+    next = request.args.get('next', '/admin', type=str)
     if 'auth' in session:
-        return render_template("auth/login.html")
+        return redirect(next)
         
     if request.method == 'POST':
-        next = request.args.get('next', '/admin')
-        username = request.form['username']
-        password = request.form['password']
-
+        try:
+            username = request.form['username']
+            password = request.form['password']
+        except KeyError:
+            flash(u"Invalid Username or Password", "error")
+            return render_template("auth/login.html", next=next)
+            
         profile = Profile()
         profile.database = db
         profile.load_admin()
@@ -29,11 +34,11 @@ def login():
             return redirect(next)
         else:
             flash(u"Invalid Username or Password", "error")
-        return render_template("auth/login.html")
-    return render_template("auth/login.html")
+    return render_template("auth/login.html", next=next)
     
 @app.route("/auth/logout")
 def logout():
+    if "auth" in session:
+        flash("Goodbye!", "info") 
     session.pop('auth', None)
-    flash("Goodbye!", "info")    
-    return render_template("auth/login.html")
+    return redirect(url_for('login'))
