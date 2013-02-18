@@ -12,6 +12,8 @@ from flask import url_for
 from flask import abort
 from flask import redirect
 from flask import flash
+from flask import request
+from flask import jsonify
 
 import markdown
 
@@ -34,3 +36,16 @@ def installation_create_homepage():
 def installation_completed():
     """Check if everything is done and say it to the user"""
     return render_template('installation/completed.html')
+
+@app.route('/api/installation/profile/new')
+def installation_api_create_profile():
+    """Create the Profile via API"""
+    username = request.args.get('username')
+    password = request.args.get('password')
+    profile = Profile()
+    profile.database = db
+    profile.is_admin = True
+    profile.username = username
+    profile.set_userhash(password)
+    profile.save()
+    return jsonify(done=True)
