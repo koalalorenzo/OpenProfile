@@ -15,7 +15,7 @@ def login():
         return render_template("auth/login.html")
         
     if request.method == 'POST':
-        next = request.args.get('next', '')
+        next = request.args.get('next', '/admin')
         username = request.form['username']
         password = request.form['password']
 
