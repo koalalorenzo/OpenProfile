@@ -30,7 +30,7 @@ def login():
         else:
             flash(u"Invalid Username or Password", "error")
         return render_template("auth/login.html")
-    return return render_template("auth/login.html")
+    return render_template("auth/login.html")
     
 @app.route("/auth/logout")
 def logout():
