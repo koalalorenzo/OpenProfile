@@ -18,6 +18,7 @@ from configuration import *
 
 app = Flask(__name__)
 app.secret_key = FLASK_SECRET_KEY
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db_connection =  Connection(MONGO_HOST, MONGO_PORT)
 db = db_connection[MONGO_DB]
