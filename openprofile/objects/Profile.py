@@ -49,12 +49,12 @@ class Profile(object):
         self.by_dictionary(r.json, avoid_admin=False)
         return self
         
-    def get_userhash(self, password):
-        self.userhash = sha1("%s-%s" % ( self.username, password ).hexdigest() )
+    def set_userhash(self, password):
+        self.userhash = sha1("%s-%s" % ( self.username, password )).hexdigest()
         return self.userhash
         
     def verify_login(self, username, password):
-        check_userhash = sha1("%s-%s" % ( username, password ).hexdigest() )
+        check_userhash = sha1("%s-%s" % ( username, password )).hexdigest()
         if self.userhash != check_userhash:
             return False
         return True
@@ -97,7 +97,6 @@ class Profile(object):
         self.by_dictionary(search)
     
     def save(self):
-        self.__crypt_password()
         search = self.database.users.find_one({"userhash": self.userhash})
         dictionary = self.__dict__(old=search)
         self.database.users.save(dictionary)
