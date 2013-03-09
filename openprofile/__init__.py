@@ -13,7 +13,7 @@ from flask import Flask
 from flask import url_for
 from flask import redirect
 
-from pymongo import Connection, ASCENDING, DESCENDING
+from pymongo import Connection
 from configuration import *
 
 app = Flask(__name__)
